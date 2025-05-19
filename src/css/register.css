@@ -1,0 +1,48 @@
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 25px;
+}
+
+.container {
+    background-color: #5f6773;
+    border: 2px  solid whitesmoke;
+    border-radius: 5px;
+    padding: 40px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-shadow: #393e46 1px 0 10px;
+}
+
+.gridItems {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#login {
+    font-size: 45px;
+    padding-bottom: 20px;
+}
+
+input {
+    resize: both;
+    width: 100%;
+    height: 35px;
+    border: 2px solid whitesmoke;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+#buttonInput {
+    font-weight: bold;
+}
+
+#textInput {
+    box-sizing: border-box; /* using ChatGPT */
+    padding-left: 15px;
+}
+
+a {
+    color: whitesmoke;
+}
