@@ -20,6 +20,13 @@
     padding-bottom: 20px;
 }
 
+.successText {
+    height: 40px;
+    line-height: 40px;
+    background-color: green;
+    text-align: center;
+    margin-bottom: 10px;
+}
 #login {
     font-size: 45px;
     padding-bottom: 20px;
