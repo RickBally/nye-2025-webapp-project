@@ -16,7 +16,6 @@ const USERS_FILE = path.join(__dirname, 'reg_users.json');
 let users: User[] = loadUsersFromFile();
 let nextId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
 
-// 🔄 Load users from users.json
 function loadUsersFromFile(): User[] {
     if (!fs.existsSync(USERS_FILE)) return [];
 
@@ -29,7 +28,6 @@ function loadUsersFromFile(): User[] {
     }
 }
 
-// 💾 Save users to users.json
 function saveUsersToFile() {
     fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
 }
@@ -60,7 +58,7 @@ export const registerUser = async (
     };
 
     users.push(user);
-    saveUsersToFile(); // ✅ persist the user list to file
+    saveUsersToFile();
 
     return { id: user.id, userName: user.userName, email: user.email, firstName: user.firstName, lastName: user.lastName };
 };
