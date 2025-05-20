@@ -9,8 +9,11 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
+  setUser: (user: User | null) => void;
   token: string | null;
+  login: (email: string, password: string) => Promise<void>;
   register: (user: string, email: string, password: string, passwordC: string, FName:string, LName: string) => Promise<void>;
+  logout: () => void;
 };
 
 // 1. Create the Context
@@ -18,7 +21,10 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // 2. Create the Provider
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser): null;
+  });
   const [token, setToken] = useState<string | null>(() => localStorage.getItem("token"));
 
   useEffect(() => {
@@ -28,7 +34,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem("token");
     }
   }, [token]);
+  // Save user to localStorage whenever user state changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
+  const login = async (email: string, password: string) => {
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
+    if (!res.ok) throw new Error("Login failed");
+
+    const data = await res.json();
+    setToken(data.token);
+    setUser(data.user);
+  };
 
   const register = async (userName: string, email: string, password: string, passwordC: string, firstName:string, lastName:string) => {
     const res = await fetch("/api/register", {
@@ -46,9 +72,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(data.user);
   };
 
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+  };
+
   return (
     // Wrap children in AuthContext.Provider
-    <AuthContext.Provider value={{ user, token, register }}>
+    <AuthContext.Provider value={{ user, setUser, token, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

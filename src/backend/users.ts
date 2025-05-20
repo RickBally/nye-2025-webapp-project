@@ -64,3 +64,15 @@ export const registerUser = async (
 
     return { id: user.id, name: user.userName, email: user.email };
 };
+
+export const findUserByEmail = (email: string) => {
+    return users.find(u => u.email === email);
+};
+
+export const verifyPassword = async (password: string, hash: string) => {
+    return bcrypt.compare(password, hash);
+};
+
+export const getUserById = (id: number) => {
+    return users.find(u => u.id === id);
+};
