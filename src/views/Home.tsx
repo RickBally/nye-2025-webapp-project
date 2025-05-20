@@ -26,7 +26,7 @@ export function Home() {
                     {user ? (
                         <div>Üdvözlünk újra, {user.userName}!</div>
                     ) : (
-                        <div>Üdvözlünk! Kérem, jelentkezzen be!</div>
+                        <div>Üdvözlünk! Kérlek, jelentkezz be!</div>
                     )}
                 </div>
             </div>
