@@ -18,10 +18,8 @@ type AuthContextType = {
   logout: () => void;
 };
 
-// 1. Create the Context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// 2. Create the Provider
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(() => {
     const storedUser = localStorage.getItem('user');
@@ -51,7 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       body: JSON.stringify({ email, password }),
     });
 
-    if (!res.ok) throw new Error("Login failed");
+    if (!res.ok) throw new Error("Sikertelen bejelentkezés.");
 
     const data = await res.json();
     setToken(data.token);
@@ -87,7 +85,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// 3. Create a custom hook to access the context
+// Create a custom hook to access the context
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
