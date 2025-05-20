@@ -5,7 +5,7 @@ import * as users from './users';
 
 const app = express();
 const PORT = 5000;
-const JWT_SECRET = 'super-secret-key'; // 🔐 Use env vars in real apps
+const JWT_SECRET = '}&@]Đfgbopfdskvbopdsőijf';
 
 app.use(cors());
 app.use(express.json());
