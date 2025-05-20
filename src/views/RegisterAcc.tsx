@@ -12,7 +12,6 @@ export function RegisterAcc() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordC, setPasswordC] = useState("");
-    const navigate = useNavigate();
     const [error, setError] = useState<string>('');
     const [success, setSuccess] = useState<string>('');
 
@@ -25,7 +24,6 @@ export function RegisterAcc() {
             await register(userName, email, password, passwordC, firstName, lastName);
             setSuccess('Sikeres regisztráció!');
         } catch (error: any) {
-          // Update the error state with the error message
             setError(error.message);
         }
     };

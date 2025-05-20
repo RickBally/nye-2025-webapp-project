@@ -8,20 +8,18 @@ export function Login() {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string>(''); // State to hold error message
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(''); // Clear previous error messages on each submit
+    setError('');
 
     try {
-      await login(email, password); // Perform login
+      await login(email, password);
       navigate('/account');
-      // Redirect to dashboard or home page after successful login
-      // You can use something like history.push('/home') if you're using react-router
+
     } catch (error) {
-      // Update the error state with the error message
       setError('Hibás felhasználónév vagy jelszó.');
       console.error('Login failed', error);
     }
