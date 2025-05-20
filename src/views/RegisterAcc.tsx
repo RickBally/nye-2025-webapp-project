@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import './../css/register.css';
 import {useAuth} from '../contexts/AuthContext';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 export function RegisterAcc() {
     const { register } = useAuth();
@@ -12,16 +12,18 @@ export function RegisterAcc() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordC, setPasswordC] = useState("");
-      const [error, setError] = useState<string>(''); // State to hold error message
+    const navigate = useNavigate();
+    const [error, setError] = useState<string>('');
+    const [success, setSuccess] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError(''); // Clear previous error messages on each submit
+        setError('');
+        setSuccess('');
     
         try {
             await register(userName, email, password, passwordC, firstName, lastName);
-          // Redirect to dashboard or home page after successful login
-          // You can use something like history.push('/home') if you're using react-router
+            setSuccess('Sikeres regisztráció!');
         } catch (error: any) {
           // Update the error state with the error message
             setError(error.message);
@@ -30,6 +32,7 @@ export function RegisterAcc() {
 
     return (
         <form onSubmit={handleSubmit}>
+            {success && <div className="successText">{success}</div>}
             {error && <div className='errorText'>{error}</div>}
             <div className="page">
                 <div className="container">
