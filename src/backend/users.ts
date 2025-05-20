@@ -62,7 +62,7 @@ export const registerUser = async (
     users.push(user);
     saveUsersToFile(); // ✅ persist the user list to file
 
-    return { id: user.id, name: user.userName, email: user.email };
+    return { id: user.id, userName: user.userName, email: user.email, firstName: user.firstName, lastName: user.lastName };
 };
 
 export const findUserByEmail = (email: string) => {

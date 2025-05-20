@@ -30,7 +30,7 @@ app.post('/api/login', async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
-    res.json({ user: { id: user.id, name: user.userName, email: user.email }, token });
+    res.json({ user: { id: user.id, userName: user.userName, email: user.email, firstName: user.firstName, lastName: user.lastName  }, token });
 });
 
 app.get('/api/me', (req, res) => {

@@ -3,7 +3,9 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 // Types for the user and context
 type User = {
   id: string;
-  name: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
   email: string;
 };
 
