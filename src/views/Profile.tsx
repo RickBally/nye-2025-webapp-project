@@ -1,68 +1,24 @@
 import React from 'react';
 import './../css/profile.css';
 import {Link} from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Profile() {
+    const { user, logout } = useAuth();
+    
     return (
-        <div className="App">
-        <div>Webshop</div>
-        <div>Profil</div>
         <div>
-            <div>
-                <label>Felhasználó név: </label>
+            <div className='navBar'>
+                <Link id='navigateButton' to="/"><div id='navigateText'>Főoldal</div></Link>
+                <input id='navigateButton' type='button' onClick={logout} value={'Kijelentkezés'}></input>
             </div>
-            <div>
-                <label>Vezetéknév: </label>
+            <div className='page'>
+            <div className='container'>
+                <div> Felhasználónév: {user?.userName}</div>
+                <div> Email cím: {user?.email}</div>
+                <div> Név: {user?.lastName} {user?.firstName}</div>
             </div>
-            <div>
-                <label>Keresztnév: </label>
-            </div>
-            <div>
-                <p>Szállítási információ</p>
-                <div>
-                    <label>Név: </label>
-                </div>
-                <div>
-                    <label>Ország: </label>
-                </div>
-                <div>
-                    <label>Város: </label>
-                </div>
-                <div>
-                    <label>Utca, Házszám: </label>
-                </div>
-                <div>
-                    <label>Irányítószám: </label>
-                </div>
-                <div>
-                    <label>Telefonszám: </label>
-                </div>
-            </div>
-            <div>
-                <p>Számlázási cím</p>
-                <div>
-                    <label>Név: </label>
-                </div>
-                <div>
-                    <label>Adószám: </label>
-                </div>
-                <div>
-                    <label>Ország: </label>
-                </div>
-                <div>
-                    <label>Város: </label>
-                </div>
-                <div>
-                    <label>Utca, Házszám: </label>
-                </div>
-                <div>
-                    <label>Irányítószám: </label>
-                </div>
-            </div>
-            <div>
-                <input type='button' value={'Kilépés'}></input>
             </div>
         </div>
-    </div>
     );
 }
